@@ -22,6 +22,7 @@ class DatabaseSeeder extends Seeder
             CreedSeeder::class,
             PastorProfileSeeder::class,
             ArticleSeeder::class,
+            MagazineSeeder::class,
         ]);
     }
 }
