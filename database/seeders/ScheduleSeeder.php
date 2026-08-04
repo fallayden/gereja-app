@@ -44,7 +44,7 @@ class ScheduleSeeder extends Seeder
                 'is_active' => true,
             ],
             [
-                'name' => 'Pendalaman Alkitab',
+                'name' => 'Kebaktian Pemuda',
                 'day' => 'Sabtu',
                 'start_time' => '18:30:00',
                 'end_time' => '20:30:00',

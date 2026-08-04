@@ -11,7 +11,7 @@ Halaman ini dirancang untuk memberikan kesan pertama yang rapi, modern, dan mema
   - Kebaktian Umum: Minggu, 09.30 - 11.00 WIB
   - Sekolah Minggu: Minggu, 09.30 - 10.30 WIB
   - Kebaktian Doa: Jumat, 17.30 - 18.30 WIB
-  - Pendalaman Alkitab: Sabtu (Minggu ke-4), 18.30 - 20.30 WIB
+  - Kebaktian Pemuda: Sabtu (Minggu ke-4), 18.30 - 20.30 WIB
 
 ### Bagian Visi, Misi, dan Tentang
 - **Konsep:** Tampilan dalam bentuk 3 *Cards* yang sejajar (Horizontal).
