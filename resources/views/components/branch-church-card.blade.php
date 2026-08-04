@@ -25,7 +25,7 @@
                 {{ $name }}
             </h3>
             <p class="text-xs font-semibold text-tertiary uppercase tracking-wider mb-3">
-                Penanggung Jawab: {{ $pastorName }}
+                Gembala: {{ $pastorName }}
             </p>
 
             @if($address)

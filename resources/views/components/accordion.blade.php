@@ -8,6 +8,7 @@
      class="border border-slate-200 rounded-lg bg-surface mb-3 overflow-hidden shadow-sm hover:border-slate-300 transition">
     <button @click="open = !open"
             type="button"
+            :aria-expanded="open"
             class="w-full flex items-center justify-between p-4 md:p-5 text-left focus:outline-none focus:bg-slate-50 transition">
         <div class="flex items-center space-x-3 pr-4">
             @if($number)

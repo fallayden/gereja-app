@@ -14,24 +14,24 @@ class BranchChurchSeeder extends Seeder
     {
         $branches = [
             [
-                'name' => 'Tunas Jemaat Pos I',
-                'pastor_name' => 'Pdt. Timotius',
+                'name' => 'GBIA Tanjung Burung',
+                'pastor_name' => 'Ev. Akonius',
                 'photo' => null,
-                'address' => 'Jl. Pos Pelayanan No. 1, Sektor Utara',
+                'address' => null,
                 'sort_order' => 1,
             ],
             [
-                'name' => 'Tunas Jemaat Pos II',
-                'pastor_name' => 'Pdt. Markus',
+                'name' => 'GBIA Musafir, Sepatan',
+                'pastor_name' => 'Ev. Servantius Lase',
                 'photo' => null,
-                'address' => 'Jl. Kebangkitan No. 12, Sektor Selatan',
+                'address' => null,
                 'sort_order' => 2,
             ],
             [
-                'name' => 'Tunas Jemaat Pos III',
-                'pastor_name' => 'Ev. Yohanes',
+                'name' => 'GBIA Citra Raya',
+                'pastor_name' => 'G.I. Oka Bagas',
                 'photo' => null,
-                'address' => 'Jl. Kasih Gembala No. 45, Sektor Timur',
+                'address' => null,
                 'sort_order' => 3,
             ],
         ];
