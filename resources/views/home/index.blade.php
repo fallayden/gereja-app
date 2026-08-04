@@ -15,10 +15,10 @@
             </p>
             <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
                 <x-button href="#jadwal" variant="primary" class="w-full sm:w-auto px-8 py-3.5 shadow-lg">
-                    🕒 lihat Jadwal Ibadah
+                    Lihat Jadwal Ibadah
                 </x-button>
                 <x-button :href="route('about')" variant="outline" class="w-full sm:w-auto px-8 py-3.5 border-white/40 text-white hover:bg-white/10 hover:text-white">
-                    📖 Tentang Gereja Kami
+                    Tentang Gereja Kami
                 </x-button>
             </div>
         </div>

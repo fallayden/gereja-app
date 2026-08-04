@@ -25,7 +25,7 @@
         <div class="p-6 flex flex-col justify-between flex-grow">
             <div>
                 <span class="inline-block text-xs font-semibold text-tertiary uppercase tracking-wider mb-2">
-                    📅 {{ $date }}
+                    {{ $date }}
                 </span>
                 <h3 class="font-display font-bold text-xl text-primary group-hover:text-tertiary transition mb-2">
                     <a href="{{ $url }}">
