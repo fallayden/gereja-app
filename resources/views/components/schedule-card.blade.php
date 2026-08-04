@@ -31,13 +31,13 @@
         </h3>
 
         <div class="flex items-center text-slate-700 text-sm font-semibold mb-3">
-            <span class="text-tertiary mr-1.5">🕒</span>
+            <span class="text-slate-500 text-xs uppercase tracking-wider mr-2">Waktu:</span>
             <span>{{ $formattedStart }} - {{ $formattedEnd }} WIB</span>
         </div>
 
         @if($location)
             <div class="flex items-start text-xs text-secondary mb-2">
-                <span class="mr-1.5 text-slate-400">📍</span>
+                <span class="text-slate-400 mr-1">Lokasi:</span>
                 <span>{{ $location }}</span>
             </div>
         @endif

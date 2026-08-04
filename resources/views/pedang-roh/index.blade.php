@@ -10,9 +10,6 @@
             <h1 class="font-display font-bold text-3xl sm:text-4xl text-white mb-3">
                 Majalah Pedang Roh
             </h1>
-            <p class="font-body text-blue-100 text-base max-w-2xl mx-auto leading-relaxed">
-                Pena kebenaran, pengajaran alkitabiah, dan edifikasi teologis bagi jemaat GBIA GRAMMATA.
-            </p>
         </div>
     </section>
 
@@ -28,7 +25,9 @@
                                value="{{ request('search') }}"
                                placeholder="Cari judul / nomor edisi..."
                                class="w-full pl-9 pr-4 py-2 text-sm bg-white border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
-                        <span class="absolute left-3 top-2.5 text-slate-400 text-sm">🔍</span>
+                        <span class="absolute left-3 top-3 text-slate-400">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+                        </span>
                     </div>
 
                     <!-- Year Filter Dropdown -->
@@ -69,13 +68,12 @@
                     <!-- Direct View Online Option -->
                     <div class="mt-2 text-center">
                         <a href="{{ asset('storage/' . $magazine->file_path) }}" target="_blank" class="inline-flex items-center text-xs font-semibold text-primary hover:text-tertiary transition">
-                            👁️ Baca di Layar (Tab Baru) &rarr;
+                            Baca di Layar (Tab Baru) &rarr;
                         </a>
                     </div>
                 </div>
             @empty
                 <div class="col-span-full text-center py-16 bg-white rounded-lg border border-slate-200">
-                    <div class="text-4xl mb-3">📚</div>
                     <h3 class="font-display font-bold text-lg text-primary mb-2">Tidak Ada Majalah Ditemukan</h3>
                     <p class="text-secondary text-sm">Tidak ada edisi majalah Pedang Roh yang cocok dengan kriteria pencarian Anda.</p>
                 </div>

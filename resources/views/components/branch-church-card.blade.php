@@ -25,12 +25,12 @@
                 {{ $name }}
             </h3>
             <p class="text-xs font-semibold text-tertiary uppercase tracking-wider mb-3">
-                Penanggung Jawab: {{ $pastorName }}
+                {{ $pastorName }}
             </p>
 
             @if($address)
                 <p class="text-xs text-secondary leading-relaxed flex items-start">
-                    <span class="mr-1">📍</span>
+                    <span class="text-slate-400 mr-1">Lokasi:</span>
                     <span>{{ $address }}</span>
                 </p>
             @endif

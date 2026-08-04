@@ -14,7 +14,7 @@
         </p>
         <div>
             <x-button :href="$buttonUrl" variant="primary" class="text-base px-8 py-3.5 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition">
-                📍 {{ $buttonText }}
+                {{ $buttonText }}
             </x-button>
         </div>
     </div>

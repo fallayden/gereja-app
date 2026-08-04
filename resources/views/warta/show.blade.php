@@ -20,7 +20,7 @@
             <article class="lg:col-span-8">
                 <!-- Date Label -->
                 <span class="inline-block text-sm font-semibold text-tertiary uppercase tracking-wider mb-3">
-                    📅 {{ $article->published_at->translatedFormat('d F Y') }}
+                    {{ $article->published_at->translatedFormat('d F Y') }}
                 </span>
 
                 <!-- Title -->
@@ -52,7 +52,7 @@
                 <!-- PDF Attachment (if available) -->
                 @if($article->attachments->isNotEmpty())
                     <div class="mt-10 pt-8 border-t border-slate-200">
-                        <h3 class="font-display font-bold text-lg text-primary mb-4">📄 Buletin PDF Terkait</h3>
+                        <h3 class="font-display font-bold text-lg text-primary mb-4">Buletin PDF Terkait</h3>
                         <div class="space-y-3">
                             @foreach($article->attachments as $attachment)
                                 <x-archive-item
@@ -70,7 +70,7 @@
             <aside class="lg:col-span-4">
                 <div class="sticky top-24">
                     <div class="bg-surface rounded-lg border border-slate-200 shadow-sm p-6">
-                        <h3 class="font-display font-bold text-lg text-primary mb-1">📄 Arsip Warta</h3>
+                        <h3 class="font-display font-bold text-lg text-primary mb-1">Arsip Warta</h3>
                         <p class="text-xs text-secondary mb-5">Buletin mingguan terbaru dalam format PDF.</p>
                         <div class="border-t border-slate-100 pt-4 space-y-4">
                             @forelse($archives as $archive)

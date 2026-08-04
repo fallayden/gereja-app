@@ -34,7 +34,6 @@
                     </a>
                 @empty
                     <div class="text-center py-16 bg-white rounded-lg border border-slate-200">
-                        <div class="text-4xl mb-3">📰</div>
                         <h3 class="font-display font-bold text-lg text-primary mb-2">Belum Ada Artikel</h3>
                         <p class="text-secondary text-sm">Artikel warta jemaat akan ditampilkan di sini setelah diunggah melalui panel admin.</p>
                     </div>
@@ -50,7 +49,7 @@
             <aside class="lg:col-span-4">
                 <div class="sticky top-24">
                     <div class="bg-surface rounded-lg border border-slate-200 shadow-sm p-6">
-                        <h3 class="font-display font-bold text-lg text-primary mb-1">📄 Arsip Warta</h3>
+                        <h3 class="font-display font-bold text-lg text-primary mb-1">Arsip Warta</h3>
                         <p class="text-xs text-secondary mb-5">Buletin mingguan terbaru dalam format PDF.</p>
                         <div class="border-t border-slate-100 pt-4 space-y-4">
                             @forelse($archives as $archive)

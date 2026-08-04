@@ -26,10 +26,10 @@
 
     <div class="flex items-center space-x-2">
         <a href="{{ $viewTarget }}" target="_blank" class="px-3 py-1.5 rounded text-xs font-medium bg-slate-100 text-slate-700 hover:bg-slate-200 transition">
-            👁️ Baca di Layar
+            Baca di Layar
         </a>
         <a href="{{ $downloadUrl }}" download class="px-3 py-1.5 rounded text-xs font-medium bg-tertiary text-white hover:bg-red-700 transition">
-            ⬇️ Download PDF
+            Download PDF
         </a>
     </div>
 </div>

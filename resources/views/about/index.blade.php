@@ -66,9 +66,6 @@
                         <h4 class="font-display font-bold text-primary text-base md:text-lg">
                             {{ $pastor->name ?? 'Gbl. Arifan T. Kusuma' }}
                         </h4>
-                        <p class="text-xs text-secondary">
-                            beserta istri, Aslina Warasi
-                        </p>
                     </div>
                 </div>
             </div>
@@ -128,7 +125,6 @@
         <div class="max-w-4xl mx-auto">
             <x-section-heading
                 title="Pengakuan Iman"
-                subtitle="31 butir pengajaran teologis dan dasar alkitabiah kepercayaan GBIA GRAMMATA"
                 centered="true"
             />
 
