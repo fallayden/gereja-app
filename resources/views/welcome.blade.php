@@ -1,30 +1,29 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Situs Gereja Solid</title>
-        
-        <!-- Fonts -->
-        <link rel="preconnect" href="https://fonts.bunny.net">
-        <link href="https://fonts.bunny.net/css?family=inter:400,500,600&display=swap" rel="stylesheet" />
+<x-app-layout title="GBIA GRAMMATA — Selamat Datang">
+    <div class="py-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+        <x-section-heading
+            title="Selamat Datang di GBIA GRAMMATA"
+            subtitle="Pondasi sistem desain, Tailwind CSS, Alpine.js, dan 16 komponen Blade UI telah berhasil dipasang."
+            centered="true"
+        />
 
-        <!-- Scripts & Styles -->
-        @vite(['resources/css/app.css', 'resources/js/app.js'])
-    </head>
-    <body class="antialiased bg-gray-50 text-gray-800 flex items-center justify-center min-h-screen">
-        <div class="text-center p-8 bg-white rounded-xl shadow-lg max-w-lg border border-gray-100">
-            <h1 class="text-4xl font-bold text-blue-600 mb-4">Selamat Datang</h1>
-            <p class="text-lg text-gray-600 mb-6">
-                Situs web gereja sedang dalam tahap pengembangan. Fondasi Laravel, Tailwind CSS, dan Filament telah berhasil dipasang!
-            </p>
-            <div class="inline-block px-6 py-2 bg-blue-600 text-white font-medium rounded-full hover:bg-blue-700 transition">
-                Sukses Diinisialisasi
-            </div>
-            
-            <div class="mt-8 pt-4 border-t border-gray-100">
-                <a href="/admin" class="text-sm text-blue-500 hover:underline">Masuk ke Dashboard Admin &rarr;</a>
-            </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 my-8">
+            <x-card class="text-center">
+                <div class="text-3xl mb-2">🎨</div>
+                <h3 class="font-display font-bold text-lg text-primary mb-1">Design System</h3>
+                <p class="text-xs text-secondary">Warna kustom (Navy, Merah, Slate Gray) dan tipografi Merriweather + Inter aktif.</p>
+            </x-card>
+
+            <x-card class="text-center">
+                <div class="text-3xl mb-2">⚡</div>
+                <h3 class="font-display font-bold text-lg text-primary mb-1">Alpine.js</h3>
+                <p class="text-xs text-secondary">Siap digunakan untuk interaksi menu mobile, accordion, dan dropdown filter.</p>
+            </x-card>
+
+            <x-card class="text-center">
+                <div class="text-3xl mb-2">🧩</div>
+                <h3 class="font-display font-bold text-lg text-primary mb-1">16 Komponen Blade</h3>
+                <p class="text-xs text-secondary">Layout, Navbar, Footer, ScheduleCard, ArticleCard, Accordion, dll.</p>
+            </x-card>
         </div>
-    </body>
-</html>
+    </div>
+</x-app-layout>
