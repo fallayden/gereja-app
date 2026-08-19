@@ -58,7 +58,8 @@
                                 <x-archive-item
                                     :fileName="$attachment->file_name"
                                     :date="$article->published_at->translatedFormat('d F Y')"
-                                    :downloadUrl="asset('storage/' . $attachment->file_path)"
+                                    :downloadUrl="route('warta.download-attachment', $attachment)"
+                                    :viewUrl="route('warta.view-attachment', $attachment)"
                                 />
                             @endforeach
                         </div>
@@ -81,7 +82,8 @@
                                     <x-archive-item
                                         :fileName="$archive->title"
                                         :date="$archive->published_at->translatedFormat('d F Y')"
-                                        :downloadUrl="asset('storage/' . $attachment->file_path)"
+                                        :downloadUrl="route('warta.download-attachment', $attachment)"
+                                        :viewUrl="route('warta.view-attachment', $attachment)"
                                     />
                                 @endif
                             @empty

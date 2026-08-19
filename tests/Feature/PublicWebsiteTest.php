@@ -133,7 +133,7 @@ class PublicWebsiteTest extends TestCase
         $this->get('/warta-jemaat')
             ->assertOk()
             ->assertSeeText('Artikel Publik')
-            ->assertSee('storage/articles/pdfs/buletin-publik.pdf')
+            ->assertSee(route('warta.download-attachment', ArticleAttachment::first()))
             ->assertDontSeeText('Artikel Draf')
             ->assertDontSeeText('Artikel Masa Depan');
 
@@ -164,7 +164,7 @@ class PublicWebsiteTest extends TestCase
 
         $response->assertOk()
             ->assertViewHas('magazines', fn ($magazines): bool => $magazines->perPage() === 8 && $magazines->total() === 10)
-            ->assertSee('storage/magazines/pdfs/edisi-9.pdf');
+            ->assertSee(route('pedang-roh.download', Magazine::firstWhere('title', 'Majalah Tahun Ini 9')));
 
         $this->get('/pedang-roh?year=2025')
             ->assertOk()
@@ -175,5 +175,49 @@ class PublicWebsiteTest extends TestCase
             ->assertOk()
             ->assertSeeText('Majalah Arsip Lama')
             ->assertDontSeeText('Majalah Tahun Ini');
+    }
+
+    public function test_pdf_download_and_view_routes_deliver_correct_headers(): void
+    {
+        \Illuminate\Support\Facades\Storage::fake('public');
+        \Illuminate\Support\Facades\Storage::disk('public')->put('magazines/test.pdf', 'PDF Content');
+        \Illuminate\Support\Facades\Storage::disk('public')->put('articles/test.pdf', 'PDF Content');
+
+        $magazine = Magazine::create([
+            'title' => 'Edisi Khusus',
+            'edition_number' => '100',
+            'publish_date' => '2026-01-01',
+            'pdf_file' => 'magazines/test.pdf',
+        ]);
+
+        $article = Article::create([
+            'title' => 'Artikel Warta',
+            'slug' => 'artikel-warta',
+            'body' => 'Isi',
+            'published_at' => now(),
+            'is_published' => true,
+        ]);
+
+        $attachment = ArticleAttachment::create([
+            'article_id' => $article->id,
+            'file_name' => 'lampiran.pdf',
+            'file_path' => 'articles/test.pdf',
+        ]);
+
+        $this->get(route('pedang-roh.download', $magazine))
+            ->assertOk()
+            ->assertHeader('content-type', 'application/pdf');
+
+        $this->get(route('pedang-roh.view', $magazine))
+            ->assertOk()
+            ->assertHeader('content-type', 'application/pdf');
+
+        $this->get(route('warta.download-attachment', $attachment))
+            ->assertOk()
+            ->assertHeader('content-type', 'application/pdf');
+
+        $this->get(route('warta.view-attachment', $attachment))
+            ->assertOk()
+            ->assertHeader('content-type', 'application/pdf');
     }
 }

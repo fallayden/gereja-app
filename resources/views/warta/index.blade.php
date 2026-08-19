@@ -60,7 +60,8 @@
                                     <x-archive-item
                                         :fileName="$archive->title"
                                         :date="$archive->published_at->translatedFormat('d F Y')"
-                                        :downloadUrl="asset('storage/' . $attachment->file_path)"
+                                        :downloadUrl="route('warta.download-attachment', $attachment)"
+                                        :viewUrl="route('warta.view-attachment', $attachment)"
                                     />
                                 @endif
                             @empty

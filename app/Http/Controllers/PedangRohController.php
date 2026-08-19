@@ -39,4 +39,32 @@ class PedangRohController extends Controller
 
         return view('pedang-roh.index', compact('magazines', 'availableYears'));
     }
+
+    public function download(Magazine $magazine)
+    {
+        if (!$magazine->pdf_file || !\Illuminate\Support\Facades\Storage::disk('public')->exists($magazine->pdf_file)) {
+            abort(404, 'File majalah tidak ditemukan.');
+        }
+
+        $fileName = \Illuminate\Support\Str::slug($magazine->title) . '-edisi-' . $magazine->edition_number . '.pdf';
+
+        return \Illuminate\Support\Facades\Storage::disk('public')->download(
+            $magazine->pdf_file,
+            $fileName,
+            ['Content-Type' => 'application/pdf']
+        );
+    }
+
+    public function view(Magazine $magazine)
+    {
+        if (!$magazine->pdf_file || !\Illuminate\Support\Facades\Storage::disk('public')->exists($magazine->pdf_file)) {
+            abort(404, 'File majalah tidak ditemukan.');
+        }
+
+        return \Illuminate\Support\Facades\Storage::disk('public')->response(
+            $magazine->pdf_file,
+            null,
+            ['Content-Type' => 'application/pdf']
+        );
+    }
 }

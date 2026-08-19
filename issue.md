@@ -1,19 +1,23 @@
-# [BUG] Ukuran Foto Thumbnail Warta Tidak Konsisten
+# [BUG] Gagal Unduh File PDF Tanpa IDM ("Couldn't download - No file")
 
 ## Deskripsi Masalah
-Terdapat ketidaksesuaian tampilan pada foto thumbnail Warta (Magazine). 
-- **Mode Desktop:** Ukuran foto thumbnail terlihat terlalu kecil dan tidak proporsional dengan layout kartu/halaman desktop.
-- **Mode Mobile:** Ukuran foto thumbnail terlihat pas dan sesuai dengan proporsi layar perangkat seluler.
+Ketika pengguna mencoba mengunduh file PDF (misalnya Majalah Pedang Roh atau Arsip Warta Jemaat):
+- **Menggunakan IDM (Internet Download Manager):** File PDF berhasil di-intersep dan diunduh oleh IDM.
+- **Tanpa IDM (Browser Native Download):** Browser (Chrome, Edge, Firefox, dll) gagal mengunduh file dan menampilkan pesan error `"Couldn't download - No file"` atau file tidak ditemukan.
+
+## Penyebab Utama (Root Cause Analysis)
+1. **Direct Storage URL tanpa Controller Response:** Link unduhan saat ini menggunakan URL langsung (`asset('storage/' . $path)`) yang sangat bergantung pada symlink `storage` dan konfigurasi web server.
+2. **Missing Response Headers (`Content-Type` & `Content-Disposition`):** Penggunaan atribut HTML `download` pada URL langsung sering diabaikan atau diblokir oleh browser jika header HTTP `Content-Disposition: attachment` dan `Content-Type: application/pdf` tidak dikirim secara resmi oleh server.
+3. **Potensi Symlink Storage Bermasalah:** Jika symlink `public/storage` tidak dikonfigurasi dengan benar atau file path mengandung spasi/karakter khusus, browser native akan gagal menemukan file tersebut.
 
 ## Perilaku yang Diharapkan (Expected Behavior)
-- Ukuran foto thumbnail warta harus responsif dan proporsional di semua ukuran layar (Desktop, Tablet, dan Mobile).
-- Pada mode Desktop, thumbnail warta memiliki tinggi/lebar yang pas (misalnya menggunakan `aspect-ratio` atau utilitas responsif yang sesuai seperti `h-48 md:h-64` atau `aspect-[3/4]`/`aspect-[4/3]`) agar konten tidak terlihat kekecilan atau terdistorsi.
-
-## Detail Lokasi & Komponen Terkait
-- Komponen tampilan warta: `resources/views/components/magazine-card.blade.php` atau file tampilan warta terkait.
-- CSS/Tailwind Class pada tag `<img>` atau container thumbnail warta.
+- Pengguna dapat mengunduh file PDF dengan lancar langsung dari browser (tanpa harus memasang IDM).
+- Browser secara otomatis mengunduh file dengan nama file yang sesuai dan header HTTP yang valid (`Content-Type: application/pdf` & `Content-Disposition: attachment`).
 
 ## Langkah Perbaikan yang Disarankan (Proposed Solution)
-1. Periksa class Tailwind / CSS pada elemen image/container thumbnail warta.
-2. Sesuaikan utility class responsif (misal: ganti fixed height/width yang terlalu kecil di layar sedang/besar dengan breakpoint responsif `md:` dan `lg:`).
-3. Pastikan `object-cover` atau `object-contain` digunakan secara konsisten agar gambar tidak mengalami *stretching* (distorsi aspek rasio).
+1. **Buat Dedicated Download Controller / Route:**
+   Buat route khusus untuk mengunduh PDF (misal: `GET /download/magazine/{id}` dan `GET /download/archive/{id}`) yang mereturn `Storage::download($path, $filename, $headers)`.
+2. **Perbarui Link Komponen Front-End:**
+   Ganti link `downloadUrl` di komponen `magazine-card`, `archive-item`, dan halaman `warta` agar mengarah ke Route Download Controller tersebut.
+3. **Pastikan Symlink Storage Aktif:**
+   Pastikan perintah `php artisan storage:link` telah dijalankan di lingkungan lokal maupun server.

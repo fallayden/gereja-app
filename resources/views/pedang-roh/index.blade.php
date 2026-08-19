@@ -63,12 +63,12 @@
                         :title="$magazine->title"
                         :edition="$magazine->edition_number"
                         :coverPath="$magazine->cover_image"
-                        :downloadUrl="$magazine->pdf_file ? asset('storage/' . $magazine->pdf_file) : null"
+                        :downloadUrl="$magazine->pdf_file ? route('pedang-roh.download', $magazine) : null"
                     />
                     <!-- Direct View Online Option -->
                     @if($magazine->pdf_file)
                         <div class="mt-2 text-center">
-                            <a href="{{ asset('storage/' . $magazine->pdf_file) }}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center text-xs font-semibold text-primary hover:text-tertiary transition">
+                            <a href="{{ route('pedang-roh.view', $magazine) }}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center text-xs font-semibold text-primary hover:text-tertiary transition">
                                 Baca di Layar (Tab Baru) &rarr;
                             </a>
                         </div>

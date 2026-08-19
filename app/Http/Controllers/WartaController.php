@@ -39,4 +39,35 @@ class WartaController extends Controller
 
         return view('warta.show', compact('article', 'archives'));
     }
+
+    public function downloadAttachment(\App\Models\ArticleAttachment $attachment)
+    {
+        if (!$attachment->file_path || !\Illuminate\Support\Facades\Storage::disk('public')->exists($attachment->file_path)) {
+            abort(404, 'File lampiran tidak ditemukan.');
+        }
+
+        $fileName = $attachment->file_name ?: basename($attachment->file_path);
+        if (!\Illuminate\Support\Str::endsWith(strtolower($fileName), '.pdf')) {
+            $fileName .= '.pdf';
+        }
+
+        return \Illuminate\Support\Facades\Storage::disk('public')->download(
+            $attachment->file_path,
+            $fileName,
+            ['Content-Type' => 'application/pdf']
+        );
+    }
+
+    public function viewAttachment(\App\Models\ArticleAttachment $attachment)
+    {
+        if (!$attachment->file_path || !\Illuminate\Support\Facades\Storage::disk('public')->exists($attachment->file_path)) {
+            abort(404, 'File lampiran tidak ditemukan.');
+        }
+
+        return \Illuminate\Support\Facades\Storage::disk('public')->response(
+            $attachment->file_path,
+            null,
+            ['Content-Type' => 'application/pdf']
+        );
+    }
 }
