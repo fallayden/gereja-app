@@ -28,8 +28,8 @@
 
     <!-- Info & Download Button -->
     <div class="p-4 flex flex-col justify-between flex-grow">
-        <div>
-            <h4 class="font-display font-bold text-base text-primary group-hover:text-tertiary transition mb-1 line-clamp-1">
+        <div title="{{ $title }}" class="overflow-hidden">
+            <h4 class="font-display font-bold text-base text-primary group-hover:text-tertiary transition-all duration-300 line-clamp-2 group-hover:line-clamp-none">
                 {{ $title }}
             </h4>
         </div>

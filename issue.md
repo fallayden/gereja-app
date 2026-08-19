@@ -1,31 +1,16 @@
-# [BUG] Tombol "Baca di Layar" Selalu Memicu Download (Tidak Bisa Dilihat Inline)
+# [BUG/ENHANCEMENT] Judul Majalah Pedang Roh Terpotong Karena Keterbatasan Ruang
 
 ## Deskripsi Masalah
-Ketika pengguna mengklik tombol **"Baca di Layar"** atau **"Baca di Layar (Tab Baru)"** pada Majalah Pedang Roh maupun Arsip Warta Jemaat:
-- **Perilaku Saat Ini:** Browser langsung mengunduh (download) file PDF ke penyimpanan perangkat pengguna, alih-alih membuka dan menampilkan pratinjau (preview) PDF di tab baru browser.
-
-## Penyebab Utama (Root Cause Analysis)
-1. **Header HTTP `Content-Disposition` Tidak Menggunakan `inline`:**
-   Pada controller (`PedangRohController::view` dan `WartaController::viewAttachment`), response yang dikembalikan belum secara eksplisit menyertakan header HTTP:
-   ```php
-   'Content-Disposition' => 'inline; filename="' . $fileName . '"'
-   ```
-   Tanpa header `inline`, banyak browser (dan ekstensi pengunduh) secara otomatis memperlakukan file PDF sebagai *attachment* sehingga langsung memaksa pengunduhan.
-2. **Kesesuaian Atribut HTML Link:**
-   Perlu dipastikan tombol "Baca di Layar" tidak memiliki atribut `download` di HTML tag `<a>`, serta membuka di tab baru (`target="_blank"`).
+Pada kartu majalah Pedang Roh (`magazine-card`), judul majalah yang panjang mengalami pemotongan teks (*truncation*) karena aturan CSS single-line (`line-clamp-1`). Hal ini membuat judul lengkap tidak dapat dibaca sepenuhnya oleh pengguna.
 
 ## Perilaku yang Diharapkan (Expected Behavior)
-- Pengguna yang mengklik **"Baca di Layar"** akan dibukakan tab baru di browser tempat PDF dapat langsung dibaca secara *inline* menggunakan PDF Viewer bawaan browser.
-- Pengguna yang mengklik **"Download PDF"** / **"Unduh Majalah"** tetap mengunduh file secara langsung ke perangkat.
+- Judul majalah harus dapat terbaca sepenuhnya saat pengguna berinteraksi (misalnya mengarahkan kursor/hover ke judul atau kartu).
+- Terdapat indikator atau solusi visual yang menarik dan responsif tanpa merusak tata letak (layout) kartu majalah.
 
 ## Langkah Perbaikan yang Disarankan (Proposed Solution)
-1. **Perbarui Response Header di Controller (`PedangRohController` & `WartaController`):**
-   Pada method `view()` dan `viewAttachment()`, kembalikan response dengan header `Content-Disposition: inline` dan `Content-Type: application/pdf`:
-   ```php
-   return response()->file(storage_path('app/public/' . $path), [
-       'Content-Type' => 'application/pdf',
-       'Content-Disposition' => 'inline; filename="' . $filename . '"',
-   ]);
-   ```
-2. **Periksa Komponen Frontend:**
-   Pastikan tag `<a>` pada tombol "Baca di Layar" di `archive-item.blade.php` dan `pedang-roh/index.blade.php` tidak menyertakan atribut `download` dan menggunakan `target="_blank"`.
+1. **Atribut `title` Bawaan Browser:**
+   Tambahkan atribut `title="{{ $title }}"` pada tag judul `<h4>` agar pembaca dapat melihat tooltip judul lengkap secara native saat hover.
+2. **Efek Scrolling / Marquee Teks Saat Hover:**
+   Terapkan efek animasi scroll teks (*marquee*) atau pergeseran teks ke kiri saat cursor diarahkan (`group-hover`), sehingga teks yang terpotong bergeser secara halus dan dapat dibaca seluruhnya.
+3. **Fleksibilitas Multiline Saat Hover:**
+   Atau izinkan judul mengembang hingga 2-3 baris (`group-hover:line-clamp-none` / `line-clamp-2`) secara halus saat hover.
