@@ -61,10 +61,15 @@ class PedangRohController extends Controller
             abort(404, 'File majalah tidak ditemukan.');
         }
 
+        $fileName = \Illuminate\Support\Str::slug($magazine->title) . '-edisi-' . $magazine->edition_number . '.pdf';
+
         return \Illuminate\Support\Facades\Storage::disk('public')->response(
             $magazine->pdf_file,
-            null,
-            ['Content-Type' => 'application/pdf']
+            $fileName,
+            [
+                'Content-Type' => 'application/pdf',
+                'Content-Disposition' => 'inline; filename="' . $fileName . '"',
+            ]
         );
     }
 }

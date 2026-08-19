@@ -64,10 +64,18 @@ class WartaController extends Controller
             abort(404, 'File lampiran tidak ditemukan.');
         }
 
+        $fileName = $attachment->file_name ?: basename($attachment->file_path);
+        if (!\Illuminate\Support\Str::endsWith(strtolower($fileName), '.pdf')) {
+            $fileName .= '.pdf';
+        }
+
         return \Illuminate\Support\Facades\Storage::disk('public')->response(
             $attachment->file_path,
-            null,
-            ['Content-Type' => 'application/pdf']
+            $fileName,
+            [
+                'Content-Type' => 'application/pdf',
+                'Content-Disposition' => 'inline; filename="' . $fileName . '"',
+            ]
         );
     }
 }

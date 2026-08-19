@@ -206,18 +206,22 @@ class PublicWebsiteTest extends TestCase
 
         $this->get(route('pedang-roh.download', $magazine))
             ->assertOk()
-            ->assertHeader('content-type', 'application/pdf');
+            ->assertHeader('content-type', 'application/pdf')
+            ->assertHeader('content-disposition', 'attachment; filename="edisi-khusus-edisi-100.pdf"');
 
         $this->get(route('pedang-roh.view', $magazine))
             ->assertOk()
-            ->assertHeader('content-type', 'application/pdf');
+            ->assertHeader('content-type', 'application/pdf')
+            ->assertHeader('content-disposition', 'inline; filename="edisi-khusus-edisi-100.pdf"');
 
         $this->get(route('warta.download-attachment', $attachment))
             ->assertOk()
-            ->assertHeader('content-type', 'application/pdf');
+            ->assertHeader('content-type', 'application/pdf')
+            ->assertHeader('content-disposition', 'attachment; filename="lampiran.pdf"');
 
         $this->get(route('warta.view-attachment', $attachment))
             ->assertOk()
-            ->assertHeader('content-type', 'application/pdf');
+            ->assertHeader('content-type', 'application/pdf')
+            ->assertHeader('content-disposition', 'inline; filename="lampiran.pdf"');
     }
 }
