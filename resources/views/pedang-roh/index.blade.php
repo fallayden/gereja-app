@@ -61,16 +61,18 @@
                 <div class="flex flex-col h-full">
                     <x-magazine-card
                         :title="$magazine->title"
-                        :edition="$magazine->edition"
-                        :coverPath="$magazine->cover_path"
-                        :downloadUrl="asset('storage/' . $magazine->file_path)"
+                        :edition="$magazine->edition_number"
+                        :coverPath="$magazine->cover_image"
+                        :downloadUrl="$magazine->pdf_file ? asset('storage/' . $magazine->pdf_file) : null"
                     />
                     <!-- Direct View Online Option -->
-                    <div class="mt-2 text-center">
-                        <a href="{{ asset('storage/' . $magazine->file_path) }}" target="_blank" class="inline-flex items-center text-xs font-semibold text-primary hover:text-tertiary transition">
-                            Baca di Layar (Tab Baru) &rarr;
-                        </a>
-                    </div>
+                    @if($magazine->pdf_file)
+                        <div class="mt-2 text-center">
+                            <a href="{{ asset('storage/' . $magazine->pdf_file) }}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center text-xs font-semibold text-primary hover:text-tertiary transition">
+                                Baca di Layar (Tab Baru) &rarr;
+                            </a>
+                        </div>
+                    @endif
                 </div>
             @empty
                 <div class="col-span-full text-center py-16 bg-white rounded-lg border border-slate-200">

@@ -7,6 +7,7 @@ use App\Models\History;
 use Filament\Actions;
 use Filament\Forms;
 use Filament\Resources\Resource;
+use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
 use Filament\Tables;
 use Filament\Tables\Table;
@@ -27,7 +28,7 @@ class HistoryResource extends Resource
     {
         return $schema
             ->components([
-                Forms\Components\Section::make('Peristiwa Sejarah')
+                Section::make('Peristiwa Sejarah')
                     ->schema([
                         Forms\Components\TextInput::make('year')
                             ->label('Tahun Peristiwa')

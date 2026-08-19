@@ -11,7 +11,7 @@
                     </div>
                     <div>
                         <span class="font-display font-bold text-xl tracking-tight block text-white">GBIA GRAMMATA</span>
-                        <span class="text-xs text-blue-200 tracking-wider uppercase block">Gereja Alkitabiah</span>
+                        <span class="text-xs text-blue-200 tracking-wider uppercase block">Gereja Baptis Independen Alkitabiah</span>
                     </div>
                 </a>
             </div>

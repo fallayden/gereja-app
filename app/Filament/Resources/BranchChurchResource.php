@@ -7,6 +7,7 @@ use App\Models\BranchChurch;
 use Filament\Actions;
 use Filament\Forms;
 use Filament\Resources\Resource;
+use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
 use Filament\Tables;
 use Filament\Tables\Table;
@@ -27,7 +28,7 @@ class BranchChurchResource extends Resource
     {
         return $schema
             ->components([
-                Forms\Components\Section::make('Informasi Tunas Jemaat')
+                Section::make('Informasi Tunas Jemaat')
                     ->schema([
                         Forms\Components\TextInput::make('name')
                             ->label('Nama Cabang / Pos Pelayanan')
@@ -51,6 +52,8 @@ class BranchChurchResource extends Resource
                         Forms\Components\FileUpload::make('photo')
                             ->label('Foto Lokasi')
                             ->image()
+                            ->disk('public')
+                            ->visibility('public')
                             ->directory('branches')
                             ->columnSpanFull(),
                     ])->columns(2),
@@ -62,7 +65,8 @@ class BranchChurchResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\ImageColumn::make('photo')
-                    ->label('Foto'),
+                    ->label('Foto')
+                    ->disk('public'),
                 Tables\Columns\TextColumn::make('name')
                     ->label('Nama Tunas Jemaat')
                     ->searchable()

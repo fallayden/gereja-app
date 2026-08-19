@@ -8,7 +8,7 @@
                     Gereja Alkitabiah yang berkomitmen mengajarkan kebenaran Firman Allah dan membina jemaat yang bertumbuh dalam Kristus.
                 </p>
                 <p class="text-xs text-blue-300">
-                    Lokasi: Gedung Utama GBIA GRAMMATA
+                    Lokasi: Ruko Santa Monica blok A No. 3
                 </p>
             </div>
 

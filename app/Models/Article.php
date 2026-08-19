@@ -18,14 +18,14 @@ class Article extends Model
         'body',
         'thumbnail',
         'published_at',
-        'is_featured',
+        'is_published',
     ];
 
     protected function casts(): array
     {
         return [
             'published_at' => 'datetime',
-            'is_featured' => 'boolean',
+            'is_published' => 'boolean',
         ];
     }
 
@@ -36,7 +36,8 @@ class Article extends Model
 
     public function scopePublished(Builder $query): Builder
     {
-        return $query->whereNotNull('published_at')
-                     ->where('published_at', '<=', now());
+        return $query->where('is_published', true)
+            ->whereNotNull('published_at')
+            ->where('published_at', '<=', now());
     }
 }

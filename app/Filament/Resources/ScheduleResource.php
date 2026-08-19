@@ -7,6 +7,7 @@ use App\Models\Schedule;
 use Filament\Actions;
 use Filament\Forms;
 use Filament\Resources\Resource;
+use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
 use Filament\Tables;
 use Filament\Tables\Table;
@@ -27,7 +28,7 @@ class ScheduleResource extends Resource
     {
         return $schema
             ->components([
-                Forms\Components\Section::make('Detail Jadwal')
+                Section::make('Detail Jadwal')
                     ->schema([
                         Forms\Components\TextInput::make('name')
                             ->label('Nama Kebaktian / Persekutuan')
@@ -38,12 +39,12 @@ class ScheduleResource extends Resource
                             ->label('Hari')
                             ->options([
                                 'Minggu' => 'Minggu',
-                                'Senin'  => 'Senin',
+                                'Senin' => 'Senin',
                                 'Selasa' => 'Selasa',
-                                'Rabu'   => 'Rabu',
-                                'Kamis'  => 'Kamis',
-                                'Jumat'  => 'Jumat',
-                                'Sabtu'  => 'Sabtu',
+                                'Rabu' => 'Rabu',
+                                'Kamis' => 'Kamis',
+                                'Jumat' => 'Jumat',
+                                'Sabtu' => 'Sabtu',
                             ])
                             ->required(),
 

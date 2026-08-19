@@ -11,19 +11,17 @@ class Magazine extends Model
 
     protected $fillable = [
         'title',
-        'edition',
-        'year',
-        'month',
-        'cover_path',
-        'file_path',
+        'edition_number',
+        'publish_date',
+        'cover_image',
+        'pdf_file',
         'description',
     ];
 
     protected function casts(): array
     {
         return [
-            'year' => 'integer',
-            'month' => 'integer',
+            'publish_date' => 'date',
         ];
     }
 }

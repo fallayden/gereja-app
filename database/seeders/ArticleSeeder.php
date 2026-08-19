@@ -24,7 +24,7 @@ class ArticleSeeder extends Seeder
 <p>Alkitab berkata: <em>"Betapa banyaknya perbuatan-Mu, ya TUHAN, sekaliannya Kaujadikan dengan kebijaksanaan, bumi penuh dengan ciptaan-Mu"</em> (Mazmur 104:24). Keajaiban yang terdapat pada makhluk sekecil katak pun menjadi saksi bisu akan kebesaran dan kecerdasan Sang Perancang Agung.</p>',
                 'thumbnail' => null,
                 'published_at' => '2026-07-05 00:00:00',
-                'is_featured' => false,
+                'is_published' => true,
                 'pdf_file_name' => 'Warta GBIA Grammata Edisi 1362 - 05 Juli 2026.pdf',
             ],
             [
@@ -37,7 +37,7 @@ class ArticleSeeder extends Seeder
 <p>Keseimbangan alam ini mengingatkan kita pada pernyataan Alkitab: <em>"Sebab apa yang tidak nampak dari pada-Nya, yaitu kekuatan-Nya yang kekal dan keilahian-Nya, dapat nampak kepada pikiran dari karya-Nya sejak dunia diciptakan"</em> (Roma 1:20).</p>',
                 'thumbnail' => null,
                 'published_at' => '2026-07-12 00:00:00',
-                'is_featured' => false,
+                'is_published' => true,
                 'pdf_file_name' => 'Warta GBIA Grammata Edisi 1363 - 12 Juli 2026.pdf',
             ],
             [
@@ -50,7 +50,7 @@ class ArticleSeeder extends Seeder
 <p>Hubungan simbiotik seperti ini menunjukkan adanya <strong>Perancang</strong> yang mendesain kedua makhluk ini untuk saling melengkapi. Sebagaimana Alkitab menyatakan: <em>"Allah melihat segala yang dijadikan-Nya itu, sungguh amat baik"</em> (Kejadian 1:31).</p>',
                 'thumbnail' => null,
                 'published_at' => '2026-07-19 00:00:00',
-                'is_featured' => false,
+                'is_published' => true,
                 'pdf_file_name' => 'Warta GBIA Grammata Edisi 1364 - 19 Juli 2026.pdf',
             ],
             [
@@ -70,7 +70,7 @@ class ArticleSeeder extends Seeder
 <p>Alkitab dengan jelas menyatakan: <em>"Pada mulanya Allah menciptakan langit dan bumi"</em> (Kejadian 1:1). Kehidupan bukanlah kebetulan — melainkan rancangan agung dari Sang Pencipta.</p>',
                 'thumbnail' => null,
                 'published_at' => '2026-07-26 00:00:00',
-                'is_featured' => true,
+                'is_published' => true,
                 'pdf_file_name' => 'Warta GBIA Grammata Edisi 1365 - 26 Juli 2026.pdf',
             ],
         ];
@@ -85,7 +85,7 @@ class ArticleSeeder extends Seeder
             ArticleAttachment::create([
                 'article_id' => $article->id,
                 'file_name' => $pdfFileName,
-                'file_path' => 'warta/' . $pdfFileName,
+                'file_path' => 'warta/'.$pdfFileName,
                 'file_size' => null,
             ]);
         }

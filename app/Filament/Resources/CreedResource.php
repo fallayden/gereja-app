@@ -7,6 +7,7 @@ use App\Models\Creed;
 use Filament\Actions;
 use Filament\Forms;
 use Filament\Resources\Resource;
+use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
 use Filament\Tables;
 use Filament\Tables\Table;
@@ -27,7 +28,7 @@ class CreedResource extends Resource
     {
         return $schema
             ->components([
-                Forms\Components\Section::make('Butir Pengakuan Iman')
+                Section::make('Butir Pengakuan Iman')
                     ->schema([
                         Forms\Components\TextInput::make('number')
                             ->label('Nomor Butir (1-31)')

@@ -7,6 +7,7 @@ use App\Models\Magazine;
 use Filament\Actions;
 use Filament\Forms;
 use Filament\Resources\Resource;
+use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
 use Filament\Tables;
 use Filament\Tables\Table;
@@ -27,12 +28,13 @@ class MagazineResource extends Resource
     {
         return $schema
             ->components([
-                Forms\Components\Section::make('Informasi Majalah')
+                Section::make('Informasi Majalah')
                     ->schema([
                         Forms\Components\TextInput::make('edition_number')
                             ->label('Nomor Edisi (contoh: Edisi 140)')
                             ->required()
-                            ->maxLength(255),
+                            ->maxLength(50)
+                            ->unique(Magazine::class, 'edition_number', ignoreRecord: true),
 
                         Forms\Components\TextInput::make('title')
                             ->label('Judul Edisi Majalah')
@@ -47,11 +49,15 @@ class MagazineResource extends Resource
                         Forms\Components\FileUpload::make('cover_image')
                             ->label('Foto Kover Majalah (Potret 3:4)')
                             ->image()
+                            ->disk('public')
+                            ->visibility('public')
                             ->directory('magazines/covers'),
 
                         Forms\Components\FileUpload::make('pdf_file')
                             ->label('Berkas PDF Majalah')
                             ->acceptedFileTypes(['application/pdf'])
+                            ->disk('public')
+                            ->visibility('public')
                             ->directory('magazines/pdfs')
                             ->required()
                             ->columnSpanFull(),
@@ -69,7 +75,8 @@ class MagazineResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\ImageColumn::make('cover_image')
-                    ->label('Kover'),
+                    ->label('Kover')
+                    ->disk('public'),
                 Tables\Columns\TextColumn::make('edition_number')
                     ->label('Edisi')
                     ->sortable()

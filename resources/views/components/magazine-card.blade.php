@@ -2,7 +2,7 @@
     'title',
     'edition',
     'coverPath' => null,
-    'downloadUrl',
+    'downloadUrl' => null,
 ])
 
 <x-card padding="p-0" class="overflow-hidden hover:shadow-xl transition-all duration-300 group flex flex-col h-full">
@@ -35,9 +35,15 @@
         </div>
 
         <div class="mt-3 pt-3 border-t border-slate-100">
-            <a href="{{ $downloadUrl }}" download class="w-full inline-flex items-center justify-center px-4 py-2 rounded-md bg-tertiary text-white text-xs font-semibold hover:bg-red-700 transition shadow-sm">
-                Unduh Majalah (PDF)
-            </a>
+            @if($downloadUrl)
+                <a href="{{ $downloadUrl }}" download class="w-full inline-flex items-center justify-center px-4 py-2 rounded-md bg-tertiary text-white text-xs font-semibold hover:bg-red-700 transition shadow-sm">
+                    Unduh Majalah (PDF)
+                </a>
+            @else
+                <span class="w-full inline-flex items-center justify-center px-4 py-2 rounded-md bg-slate-200 text-slate-500 text-xs font-semibold">
+                    PDF Belum Tersedia
+                </span>
+            @endif
         </div>
     </div>
 </x-card>

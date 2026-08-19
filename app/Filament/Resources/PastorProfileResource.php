@@ -7,6 +7,7 @@ use App\Models\PastorProfile;
 use Filament\Actions;
 use Filament\Forms;
 use Filament\Resources\Resource;
+use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
 use Filament\Tables;
 use Filament\Tables\Table;
@@ -27,7 +28,7 @@ class PastorProfileResource extends Resource
     {
         return $schema
             ->components([
-                Forms\Components\Section::make('Informasi Gembala')
+                Section::make('Informasi Gembala')
                     ->schema([
                         Forms\Components\TextInput::make('name')
                             ->label('Nama Lengkap Gembala')
@@ -42,11 +43,14 @@ class PastorProfileResource extends Resource
                         Forms\Components\FileUpload::make('photo')
                             ->label('Foto Gembala')
                             ->image()
+                            ->disk('public')
+                            ->visibility('public')
                             ->directory('pastor')
                             ->columnSpanFull(),
 
                         Forms\Components\Textarea::make('greeting')
                             ->label('Kata Sambutan Gembala')
+                            ->required()
                             ->rows(6)
                             ->columnSpanFull(),
 
@@ -62,7 +66,8 @@ class PastorProfileResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\ImageColumn::make('photo')
-                    ->label('Foto'),
+                    ->label('Foto')
+                    ->disk('public'),
                 Tables\Columns\TextColumn::make('name')
                     ->label('Nama Gembala')
                     ->searchable(),

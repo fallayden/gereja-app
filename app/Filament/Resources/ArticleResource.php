@@ -7,6 +7,8 @@ use App\Models\Article;
 use Filament\Actions;
 use Filament\Forms;
 use Filament\Resources\Resource;
+use Filament\Schemas\Components\Section;
+use Filament\Schemas\Components\Utilities\Set;
 use Filament\Schemas\Schema;
 use Filament\Tables;
 use Filament\Tables\Table;
@@ -28,14 +30,14 @@ class ArticleResource extends Resource
     {
         return $schema
             ->components([
-                Forms\Components\Section::make('Informasi Artikel')
+                Section::make('Informasi Artikel')
                     ->schema([
                         Forms\Components\TextInput::make('title')
                             ->label('Judul Artikel')
                             ->required()
                             ->maxLength(255)
                             ->live(onBlur: true)
-                            ->afterStateUpdated(fn (string $operation, $state, Forms\Set $set) => $operation === 'create' ? $set('slug', Str::slug($state)) : null),
+                            ->afterStateUpdated(fn (string $operation, $state, Set $set) => $operation === 'create' ? $set('slug', Str::slug($state)) : null),
 
                         Forms\Components\TextInput::make('slug')
                             ->label('Slug URL')
@@ -55,6 +57,8 @@ class ArticleResource extends Resource
                         Forms\Components\FileUpload::make('thumbnail')
                             ->label('Foto Sampul / Thumbnail')
                             ->image()
+                            ->disk('public')
+                            ->visibility('public')
                             ->directory('articles/thumbnails')
                             ->columnSpanFull(),
 
@@ -64,7 +68,7 @@ class ArticleResource extends Resource
                             ->columnSpanFull(),
                     ])->columns(2),
 
-                Forms\Components\Section::make('Lampiran Buletin PDF')
+                Section::make('Lampiran Buletin PDF')
                     ->schema([
                         Forms\Components\Repeater::make('attachments')
                             ->relationship('attachments')
@@ -75,6 +79,8 @@ class ArticleResource extends Resource
                                 Forms\Components\FileUpload::make('file_path')
                                     ->label('Berkas PDF')
                                     ->acceptedFileTypes(['application/pdf'])
+                                    ->disk('public')
+                                    ->visibility('public')
                                     ->directory('articles/pdfs')
                                     ->required(),
                             ])
@@ -89,7 +95,8 @@ class ArticleResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\ImageColumn::make('thumbnail')
-                    ->label('Thumbnail'),
+                    ->label('Thumbnail')
+                    ->disk('public'),
                 Tables\Columns\TextColumn::make('title')
                     ->label('Judul Artikel')
                     ->searchable()
