@@ -41,7 +41,9 @@ return [
         'public' => [
             'driver' => 'local',
             'root' => storage_path('app/public'),
-            'url' => rtrim(env('APP_URL', 'http://localhost'), '/').'/storage',
+            // Keep browser previews on the same origin (including the current port).
+            // An absolute APP_URL can point FilePond at the wrong development host.
+            'url' => env('PUBLIC_FILESYSTEM_URL', '/storage'),
             'visibility' => 'public',
             'throw' => false,
             'report' => false,
