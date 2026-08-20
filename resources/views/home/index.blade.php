@@ -91,11 +91,11 @@
                     Menjangkau melalui internet, memfasilitasi untuk memenuhi kebutuhan umat TUHAN melalui internet.
                 </x-visi-misi-card>
 
-                <!-- Tentang Card (dengan tombol "Baca Selengkapnya") -->
+                <!-- Tentang Card (dengan tombol "Selengkapnya") -->
                 <x-visi-misi-card
                     title="Tentang Gereja"
                     :action="route('about')"
-                    actionText="Baca Selengkapnya"
+                    actionText="Selengkapnya"
                 >
                     <x-slot:icon>
                         <svg class="w-6 h-6 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">

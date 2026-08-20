@@ -81,7 +81,7 @@
                     @if($magazine->pdf_file)
                         <div class="mt-2 text-center">
                             <a href="{{ route('pedang-roh.view', $magazine) }}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center text-xs font-semibold text-primary hover:text-tertiary transition">
-                                Baca di Layar (Tab Baru) &rarr;
+                                Baca PDF Online
                             </a>
                         </div>
                     @endif

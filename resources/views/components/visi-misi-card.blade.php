@@ -29,7 +29,7 @@
     @if($action)
         <div>
             <x-button :href="$action" variant="outline" class="w-full text-xs py-2">
-                {{ $actionText }} &rarr;
+                {{ $actionText }}
             </x-button>
         </div>
     @endif

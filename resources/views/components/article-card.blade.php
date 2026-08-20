@@ -39,7 +39,7 @@
 
             <div>
                 <a href="{{ $url }}" class="inline-flex items-center text-xs font-semibold text-primary hover:text-tertiary transition">
-                    Baca Selengkapnya &rarr;
+                    Baca Selengkapnya
                 </a>
             </div>
         </div>
