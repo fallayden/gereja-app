@@ -35,6 +35,14 @@ class PublicWebsiteTest extends TestCase
         $this->get('/pedang-roh')->assertOk();
     }
 
+    public function test_public_navigation_links_directly_to_the_admin_login(): void
+    {
+        $this->get('/')
+            ->assertOk()
+            ->assertSeeText('Admin')
+            ->assertSee(route('filament.admin.auth.login'), false);
+    }
+
     public function test_homepage_only_displays_active_schedules(): void
     {
         Schedule::create([
