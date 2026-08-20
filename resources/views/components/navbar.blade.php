@@ -4,11 +4,8 @@
             <!-- Logo & Brand Name -->
             <div class="flex items-center space-x-3">
                 <a href="{{ route('home') }}" class="flex items-center space-x-3 group">
-                    <div class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white border border-white/20 group-hover:bg-white/20 transition">
-                        <svg class="w-6 h-6 text-tertiary" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M12 2L1 21h22L12 2zm0 3.5L19.5 19h-15L12 5.5z"/>
-                        </svg>
-                    </div>
+                    <img src="{{ asset('images/logo.jpeg') }}" alt="Logo GBIA GRAMMATA" class="w-10 h-10 rounded-full object-cover border border-white/20 group-hover:scale-105 transition">
+
                     <div>
                         <span class="font-display font-bold text-xl tracking-tight block text-white">GBIA GRAMMATA</span>
                         <span class="text-xs text-blue-200 tracking-wider uppercase block">Gereja Baptis Independen Alkitabiah</span>

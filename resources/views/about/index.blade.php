@@ -1,10 +1,22 @@
 <x-app-layout title="Tentang Kami — GBIA GRAMMATA">
 
     <!-- Hero Header Banner -->
-    <section class="bg-gradient-to-b from-primary to-blue-950 text-white py-16 md:py-20 px-4 sm:px-6 lg:px-8 text-center relative overflow-hidden">
-        <div class="absolute inset-0 bg-white/5 bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:16px_16px] opacity-30"></div>
-        <div class="relative max-w-4xl mx-auto">
-            <span class="inline-block px-3 py-1 rounded-full bg-white/10 text-blue-200 text-xs font-semibold uppercase tracking-widest mb-3 border border-white/15">
+    <section class="relative text-white py-16 md:py-24 px-4 sm:px-6 lg:px-8 text-center overflow-hidden">
+        <!-- Foto Background (menggunakan foto-tentang.jpeg dengan Overlay Biru-Navy) -->
+        <div class="absolute inset-0 z-0">
+            @if(file_exists(public_path('images/foto-tentang.jpeg')))
+                <img src="{{ asset('images/foto-tentang.jpeg') }}" alt="Profil Gereja GBIA Grammata" class="w-full h-full object-cover object-center">
+                <div class="absolute inset-0" style="background-color: rgba(15, 30, 60, 0.85);"></div>
+            @elseif(file_exists(public_path('images/foto-tentang.jpg')))
+                <img src="{{ asset('images/foto-tentang.jpg') }}" alt="Profil Gereja GBIA Grammata" class="w-full h-full object-cover object-center">
+                <div class="absolute inset-0" style="background-color: rgba(15, 30, 60, 0.85);"></div>
+            @else
+                <div class="w-full h-full bg-gradient-to-b from-primary to-blue-950"></div>
+            @endif
+        </div>
+
+        <div class="relative z-10 max-w-4xl mx-auto">
+            <span class="inline-block px-3 py-1 rounded-full text-blue-200 text-xs font-semibold uppercase tracking-widest mb-3 border border-white/20" style="background-color: rgba(255, 255, 255, 0.15);">
                 Profil Gereja
             </span>
             <h1 class="font-display font-bold text-3xl sm:text-4xl md:text-5xl text-white mb-4">
@@ -25,6 +37,10 @@
                     <div class="aspect-[4/5] rounded-2xl bg-slate-200 overflow-hidden shadow-xl border-4 border-white relative flex items-center justify-center">
                         @if($pastor && $pastor->photo)
                             <img src="{{ asset('storage/' . $pastor->photo) }}" alt="{{ $pastor->name }}" class="w-full h-full object-cover">
+                        @elseif(file_exists(public_path('images/foto-tentang.jpeg')))
+                            <img src="{{ asset('images/foto-tentang.jpeg') }}" alt="{{ $pastor->name ?? 'Gbl. Arifan T. Kusuma' }}" class="w-full h-full object-cover">
+                        @elseif(file_exists(public_path('images/foto-tentang.jpg')))
+                            <img src="{{ asset('images/foto-tentang.jpg') }}" alt="{{ $pastor->name ?? 'Gbl. Arifan T. Kusuma' }}" class="w-full h-full object-cover">
                         @else
                             <div class="p-8 text-center text-slate-400">
                                 <svg class="w-20 h-20 mx-auto mb-3 text-slate-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">

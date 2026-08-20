@@ -1,23 +1,33 @@
 <x-app-layout title="Beranda — GBIA GRAMMATA">
 
     <!-- Hero Banner Section -->
-    <section class="relative bg-gradient-to-b from-primary to-blue-950 text-white py-20 md:py-28 px-4 sm:px-6 lg:px-8 overflow-hidden">
-        <div class="absolute inset-0 bg-white/5 bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:16px_16px] opacity-30"></div>
-        <div class="relative max-w-5xl mx-auto text-center">
-            <span class="inline-block px-4 py-1.5 rounded-full bg-white/10 text-blue-200 text-xs font-semibold uppercase tracking-widest mb-4 border border-white/15">
+    <section class="relative text-white py-16 md:py-24 px-4 sm:px-6 lg:px-8 overflow-hidden min-h-[580px] flex items-center justify-center">
+        <!-- Foto Latar Belakang -->
+        <div class="absolute inset-0 z-0">
+            <img src="{{ asset('images/foto-beranda.jpg') }}" alt="Foto Beranda GBIA Grammata" class="w-full h-full object-cover object-center">
+            <!-- Overlay Gelap pada Sekeliling Foto -->
+            <div class="absolute inset-0" style="background-color: rgba(15, 23, 42, 0.45);"></div>
+        </div>
+
+        <!-- Wadah Teks Solid (Berwarna Biru Tua Pekat / Navy) -->
+        <div class="relative z-10 max-w-4xl mx-auto text-center rounded-3xl p-8 sm:p-12 shadow-2xl border-2 border-white/20" style="background-color: rgba(15, 30, 60, 0.94); box-shadow: 0 20px 50px rgba(0,0,0,0.8);">
+            <span class="inline-block px-4 py-1.5 rounded-full text-blue-200 text-xs font-semibold uppercase tracking-widest mb-6 border border-white/20 shadow-md" style="background-color: rgba(255, 255, 255, 0.12);">
                 Gereja Alkitabiah Serpong, Tangerang
             </span>
-            <h1 class="font-display font-bold text-3xl sm:text-4xl md:text-5xl lg:text-6xl tracking-tight text-white leading-tight mb-6">
-                Selamat Datang di <span class="text-blue-200">GBIA GRAMMATA</span>
+            
+            <h1 class="font-display font-extrabold text-3xl sm:text-4xl md:text-5xl lg:text-6xl tracking-tight text-white leading-tight mb-6">
+                Selamat Datang di <span class="text-blue-300">GBIA GRAMMATA</span>
             </h1>
-            <p class="font-body text-blue-100 text-base sm:text-lg md:text-xl max-w-3xl mx-auto leading-relaxed mb-8">
+            
+            <p class="font-body text-slate-100 text-base sm:text-lg md:text-xl max-w-2xl mx-auto leading-relaxed mb-8 font-medium">
                 Menjadi tiang penopang dan dasar kebenaran di daerah Serpong, mempersiapkan umat yang mengasihi, bertumbuh, dan melayani Tuhan.
             </p>
+            
             <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-                <x-button href="#jadwal" variant="primary" class="w-full sm:w-auto px-8 py-3.5 shadow-lg">
+                <x-button href="#jadwal" variant="primary" class="w-full sm:w-auto px-8 py-3.5 shadow-lg font-bold">
                     Lihat Jadwal Ibadah
                 </x-button>
-                <x-button :href="route('about')" variant="outline" class="w-full sm:w-auto px-8 py-3.5 border-white/40 text-white hover:bg-white/10 hover:text-white">
+                <x-button :href="route('about')" variant="outline" class="w-full sm:w-auto px-8 py-3.5 border-white/50 text-white hover:bg-white hover:text-slate-900 font-semibold transition" style="background-color: rgba(255,255,255,0.1);">
                     Tentang Gereja Kami
                 </x-button>
             </div>

@@ -1,10 +1,22 @@
 <x-app-layout title="Warta Jemaat — GBIA GRAMMATA">
 
-    <!-- Hero Header -->
-    <section class="bg-gradient-to-b from-primary to-blue-950 text-white py-14 md:py-18 px-4 sm:px-6 lg:px-8 text-center relative overflow-hidden">
-        <div class="absolute inset-0 bg-white/5 bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:16px_16px] opacity-30"></div>
-        <div class="relative max-w-4xl mx-auto">
-            <span class="inline-block px-3 py-1 rounded-full bg-white/10 text-blue-200 text-xs font-semibold uppercase tracking-widest mb-3 border border-white/15">
+    <!-- Hero Header Banner -->
+    <section class="relative text-white py-14 md:py-20 px-4 sm:px-6 lg:px-8 text-center overflow-hidden">
+        <!-- Foto Background Warta (dengan Overlay Biru-Navy) -->
+        <div class="absolute inset-0 z-0">
+            @if(file_exists(public_path('images/foto-warta.jpg')))
+                <img src="{{ asset('images/foto-warta.jpg') }}" alt="Warta Jemaat GBIA Grammata" class="w-full h-full object-cover object-center">
+                <div class="absolute inset-0" style="background-color: rgba(15, 30, 60, 0.85);"></div>
+            @elseif(file_exists(public_path('images/foto-warta.jpeg')))
+                <img src="{{ asset('images/foto-warta.jpeg') }}" alt="Warta Jemaat GBIA Grammata" class="w-full h-full object-cover object-center">
+                <div class="absolute inset-0" style="background-color: rgba(15, 30, 60, 0.85);"></div>
+            @else
+                <div class="w-full h-full bg-gradient-to-b from-primary to-blue-950"></div>
+            @endif
+        </div>
+
+        <div class="relative z-10 max-w-4xl mx-auto">
+            <span class="inline-block px-3 py-1 rounded-full text-blue-200 text-xs font-semibold uppercase tracking-widest mb-3 border border-white/20" style="background-color: rgba(255, 255, 255, 0.15);">
                 Warta Jemaat
             </span>
             <h1 class="font-display font-bold text-3xl sm:text-4xl text-white mb-3">
