@@ -35,18 +35,20 @@
             <div class="lg:col-span-5 flex justify-center">
                 <div class="relative w-full max-w-md">
                     <div class="aspect-[4/5] rounded-2xl bg-slate-200 overflow-hidden shadow-xl border-4 border-white relative flex items-center justify-center">
-                        @if($pastor && $pastor->photo)
-                            <img src="{{ asset('storage/' . $pastor->photo) }}" alt="{{ $pastor->name }}" class="w-full h-full object-cover">
+                        @if(!empty($pastor['photo']))
+                            <img src="{{ str_starts_with($pastor['photo'], 'images/') ? asset($pastor['photo']) : asset('storage/' . $pastor['photo']) }}" alt="{{ $pastor['name'] }}" class="w-full h-full object-cover">
+                        @elseif(file_exists(public_path('images/gembala.jpg')))
+                            <img src="{{ asset('images/gembala.jpg') }}" alt="{{ $pastor['name'] }}" class="w-full h-full object-cover">
                         @elseif(file_exists(public_path('images/foto-tentang.jpeg')))
-                            <img src="{{ asset('images/foto-tentang.jpeg') }}" alt="{{ $pastor->name ?? 'Gbl. Arifan T. Kusuma' }}" class="w-full h-full object-cover">
+                            <img src="{{ asset('images/foto-tentang.jpeg') }}" alt="{{ $pastor['name'] }}" class="w-full h-full object-cover">
                         @elseif(file_exists(public_path('images/foto-tentang.jpg')))
-                            <img src="{{ asset('images/foto-tentang.jpg') }}" alt="{{ $pastor->name ?? 'Gbl. Arifan T. Kusuma' }}" class="w-full h-full object-cover">
+                            <img src="{{ asset('images/foto-tentang.jpg') }}" alt="{{ $pastor['name'] }}" class="w-full h-full object-cover">
                         @else
                             <div class="p-8 text-center text-slate-400">
                                 <svg class="w-20 h-20 mx-auto mb-3 text-slate-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                                 </svg>
-                                <span class="font-display font-bold text-slate-500 block text-lg mb-1">{{ $pastor->name ?? 'Gbl. Arifan T. Kusuma' }}</span>
+                                <span class="font-display font-bold text-slate-500 block text-lg mb-1">{{ $pastor['name'] }}</span>
                                 <span class="text-xs text-slate-400">Foto Gembala & Keluarga</span>
                             </div>
                         @endif
@@ -67,20 +69,18 @@
                     Selamat Datang di GBIA GRAMMATA
                 </h2>
 
-                @if($pastor && $pastor->greeting)
-                    <div class="font-display text-secondary text-base md:text-lg leading-relaxed space-y-4 italic">
-                        @foreach(explode("\n\n", $pastor->greeting) as $paragraph)
-                            <p class="not-italic font-normal text-slate-700 text-sm md:text-base leading-relaxed">
-                                "{{ $paragraph }}"
-                            </p>
-                        @endforeach
-                    </div>
-                @endif
+                <div class="font-display text-secondary text-base md:text-lg leading-relaxed space-y-4 italic">
+                    @foreach($pastor['greeting'] as $paragraph)
+                        <p class="not-italic font-normal text-slate-700 text-sm md:text-base leading-relaxed">
+                            "{{ $paragraph }}"
+                        </p>
+                    @endforeach
+                </div>
 
                 <div class="mt-8 pt-6 border-t border-slate-200 flex items-center justify-between">
                     <div>
                         <h4 class="font-display font-bold text-primary text-base md:text-lg">
-                            {{ $pastor->name ?? 'Gbl. Arifan T. Kusuma' }}
+                            {{ $pastor['name'] }}
                         </h4>
                     </div>
                 </div>
@@ -105,9 +105,9 @@
                 <div class="space-y-6">
                     @foreach($histories as $index => $history)
                         <x-timeline-item
-                            :year="$history->year"
-                            :title="$history->title"
-                            :description="$history->description"
+                            :year="$history['year']"
+                            :title="$history['title']"
+                            :description="$history['description']"
                             :position="$index % 2 == 0 ? 'left' : 'right'"
                         />
                     @endforeach
@@ -127,10 +127,10 @@
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-10">
             @foreach($branches as $branch)
                 <x-branch-church-card
-                    :name="$branch->name"
-                    :pastorName="$branch->pastor_name"
-                    :photo="$branch->photo"
-                    :address="$branch->address"
+                    :name="$branch['name']"
+                    :pastorName="$branch['pastor_name']"
+                    :photo="$branch['photo']"
+                    :address="$branch['address']"
                 />
             @endforeach
         </div>
@@ -147,12 +147,12 @@
             <div class="mt-10">
                 @foreach($creeds as $creed)
                     <x-accordion
-                        :number="$creed->number"
-                        :title="$creed->title"
+                        :number="$creed['number']"
+                        :title="$creed['title']"
                         :open="$loop->first"
                     >
                         <p class="text-slate-700 text-sm md:text-base leading-relaxed">
-                            {{ $creed->content }}
+                            {{ $creed['content'] }}
                         </p>
                     </x-accordion>
                 @endforeach

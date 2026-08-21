@@ -8,7 +8,7 @@
 <x-card padding="p-0" class="overflow-hidden hover:shadow-lg transition flex flex-col h-full">
     <div class="h-44 bg-slate-200 relative flex items-center justify-center text-slate-400">
         @if($photo)
-            <img src="{{ asset('storage/' . $photo) }}" alt="{{ $name }}" class="w-full h-full object-cover">
+            <img src="{{ str_starts_with($photo, 'images/') ? asset($photo) : asset('storage/' . $photo) }}" alt="{{ $name }}" class="w-full h-full object-cover">
         @else
             <div class="text-center p-4">
                 <svg class="w-12 h-12 mx-auto mb-1 text-slate-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">

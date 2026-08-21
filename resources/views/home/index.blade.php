@@ -43,20 +43,16 @@
         />
 
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            @forelse($schedules as $schedule)
+            @foreach($schedules as $schedule)
                 <x-schedule-card
-                    :name="$schedule->name"
-                    :day="$schedule->day"
-                    :startTime="$schedule->start_time"
-                    :endTime="$schedule->end_time"
-                    :location="$schedule->location"
-                    :note="$schedule->note"
+                    :name="$schedule['name']"
+                    :day="$schedule['day']"
+                    :startTime="$schedule['start_time']"
+                    :endTime="$schedule['end_time']"
+                    :location="$schedule['location']"
+                    :note="$schedule['note']"
                 />
-            @empty
-                <div class="col-span-full text-center py-12 bg-white rounded-lg border border-slate-200">
-                    <p class="text-secondary text-sm">Belum ada jadwal ibadah yang dikonfigurasi.</p>
-                </div>
-            @endforelse
+            @endforeach
         </div>
     </section>
 
