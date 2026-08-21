@@ -7,9 +7,6 @@
             @if(file_exists(public_path('images/foto-warta.jpg')))
                 <img src="{{ asset('images/foto-warta.jpg') }}" alt="Warta Jemaat GBIA Grammata" class="w-full h-full object-cover object-center">
                 <div class="absolute inset-0" style="background-color: rgba(15, 30, 60, 0.85);"></div>
-            @elseif(file_exists(public_path('images/foto-warta.jpeg')))
-                <img src="{{ asset('images/foto-warta.jpeg') }}" alt="Warta Jemaat GBIA Grammata" class="w-full h-full object-cover object-center">
-                <div class="absolute inset-0" style="background-color: rgba(15, 30, 60, 0.85);"></div>
             @else
                 <div class="w-full h-full bg-gradient-to-b from-primary to-blue-950"></div>
             @endif

@@ -2,12 +2,9 @@
 
     <!-- Hero Header Banner -->
     <section class="relative text-white py-16 md:py-24 px-4 sm:px-6 lg:px-8 text-center overflow-hidden">
-        <!-- Foto Background (menggunakan foto-tentang.jpeg dengan Overlay Biru-Navy) -->
+        <!-- Foto Background dengan Overlay Biru-Navy -->
         <div class="absolute inset-0 z-0">
-            @if(file_exists(public_path('images/foto-tentang.jpeg')))
-                <img src="{{ asset('images/foto-tentang.jpeg') }}" alt="Profil Gereja GBIA Grammata" class="w-full h-full object-cover object-center">
-                <div class="absolute inset-0" style="background-color: rgba(15, 30, 60, 0.85);"></div>
-            @elseif(file_exists(public_path('images/foto-tentang.jpg')))
+            @if(file_exists(public_path('images/foto-tentang.jpg')))
                 <img src="{{ asset('images/foto-tentang.jpg') }}" alt="Profil Gereja GBIA Grammata" class="w-full h-full object-cover object-center">
                 <div class="absolute inset-0" style="background-color: rgba(15, 30, 60, 0.85);"></div>
             @else
@@ -39,8 +36,6 @@
                             <img src="{{ str_starts_with($pastor['photo'], 'images/') ? asset($pastor['photo']) : asset('storage/' . $pastor['photo']) }}" alt="{{ $pastor['name'] }}" class="w-full h-full object-cover">
                         @elseif(file_exists(public_path('images/gembala.jpg')))
                             <img src="{{ asset('images/gembala.jpg') }}" alt="{{ $pastor['name'] }}" class="w-full h-full object-cover">
-                        @elseif(file_exists(public_path('images/foto-tentang.jpeg')))
-                            <img src="{{ asset('images/foto-tentang.jpeg') }}" alt="{{ $pastor['name'] }}" class="w-full h-full object-cover">
                         @elseif(file_exists(public_path('images/foto-tentang.jpg')))
                             <img src="{{ asset('images/foto-tentang.jpg') }}" alt="{{ $pastor['name'] }}" class="w-full h-full object-cover">
                         @else

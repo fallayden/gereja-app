@@ -1,58 +1,81 @@
-# [REFACTOR/ENHANCEMENT] Penyederhanaan Admin Panel: Menghapus Kelola Profil & Informasi Gereja (Dibuat Hardcode)
+# [OPTIMIZATION] Plan Optimalisasi Codebase & Restrukturisasi Aplikasi GBIA Grammata
 
 ## 📌 Ringkasan Masalah & Tujuan
-Saat ini, Admin Panel (Filament) memiliki fitur pengelola profil dan informasi gereja (Profil Pendeta, Sejarah, Pengakuan Iman, Cabang Gereja, dan Jadwal Ibadah). Namun, kebutuhan riil pengelola gereja hanya fokus pada publikasi berkala, yaitu **Warta Jemaat** dan **Majalah Pedang Roh**. 
+Setelah dilakukan refactoring penyederhanaan Admin Panel (menghapus modul profil & meng-hardcode data profil gereja), codebase memerlukan audit menyeluruh untuk memastikan struktur folder, dependensi, konfigurasi environment, serta kebersihan file tetap mengikuti **best practices** industri.
 
-Informasi profil gereja relatif statis dan jarang berubah. Oleh karena itu, fitur kelola profil & informasi di Admin Panel akan dihapus, dan data profil tersebut akan dipindahkan menjadi **hardcoded** langsung pada tampilan/blade view atau file konfigurasi statis.
-
----
-
-## 🎯 Tujuan Utama
-1. **Sederhanakan Admin Panel**: Menyoroti dan menyisakan hanya 2 modul utama di Filament Admin:
-   - **Warta Jemaat** (`ArticleResource`)
-   - **Majalah Pedang Roh** (`MagazineResource`)
-2. **Pindahkan Data Profil ke Hardcode**: Mengubah konsumsi data pada halaman publik (Profil, Sejarah, Pengakuan Iman, Pendeta, Jadwal Ibadah, Cabang Gereja) dari database menjadi teks/komponen statis pada Blade templates.
-3. **Optimasi & Efisiensi**: Mengurangi beban query database untuk data yang bersifat statis.
+Tujuan utama issue ini adalah melakukan pembersihan (*clean-up*), penghapusan file/folder redundan, penyelarasan konvensi penamaan, dan optimasi konfigurasi environment agar aplikasi lebih ringan, cepat, dan mudah dipelihara.
 
 ---
 
-## 🛠️ Rincian Perubahan yang Diperlukan
+## 📋 Area Fokus Optimalisasi
 
-### 1. Perubahan Admin Panel (Filament)
-Hapus atau nonaktifkan modul-modul Resource berikut dari `app/Filament/Resources/`:
-- ❌ `PastorProfileResource.php` & folder terkait
-- ❌ `HistoryResource.php` & folder terkait
-- ❌ `CreedResource.php` & folder terkait
-- ❌ `BranchChurchResource.php` & folder terkait
-- ❌ `ScheduleResource.php` & folder terkait
-
-**Menyisakan:**
-- ✅ `ArticleResource.php` (Warta Jemaat)
-- ✅ `MagazineResource.php` (Majalah Pedang Roh)
+### 1. 📁 Struktur Folder & Best Practices
+- [ ] **Pembersihan Storage Media**:
+  - Hapus subfolder `storage/app/public/pastor/` dan `storage/app/public/branches/` karena aset gambar sudah dipindahkan ke `public/images/`.
+  - Pastikan folder `storage/app/public/articles/` dan `storage/app/public/magazines/` tetap terjaga dengan izin akses yang sesuai (*symbolic link* `php artisan storage:link`).
+- [ ] **Struktur Blade Views & Components**:
+  - Pastikan seluruh reusable UI components terletak konsisten di `resources/views/components/`.
+  - Struktur modul publik terpisah jelas: `resources/views/home/`, `resources/views/about/`, `resources/views/warta/`, dan `resources/views/pedang-roh/`.
 
 ---
 
-### 2. Refactoring Halaman Publik (Blade Views & Controllers)
-Ubah controller dan view publik agar tidak lagi melakukan fetch data profil dari database:
-- **`AboutController.php` / `resources/views/about.blade.php`**:
-  - Hapus query ke model `PastorProfile`, `History`, `Creed`, `BranchChurch`.
-  - Tuliskan isi Sejarah, Pengakuan Iman, Daftar Pendeta, dan Cabang Gereja secara statis (hardcoded) dengan desain HTML/CSS yang rapi.
-- **`HomeController.php` / `resources/views/home.blade.php`**:
-  - Hapus query data Jadwal Ibadah dari database (`Schedule`).
-  - Tuliskan informasi Jadwal Ibadah secara statis pada komponen UI yang sesuai.
+### 2. 🧹 Penghapusan File & Modul Redundan (Dead Code Cleanup)
+- [ ] **Hapus Legacy Models yang Unused**:
+  - ❌ `app/Models/PastorProfile.php`
+  - ❌ `app/Models/History.php`
+  - ❌ `app/Models/Creed.php`
+  - ❌ `app/Models/BranchChurch.php`
+  - ❌ `app/Models/Schedule.php`
+- [ ] **Hapus Legacy Seeders yang Unused**:
+  - ❌ `database/seeders/PastorProfileSeeder.php`
+  - ❌ `database/seeders/HistorySeeder.php`
+  - ❌ `database/seeders/CreedSeeder.php`
+  - ❌ `database/seeders/BranchChurchSeeder.php`
+  - ❌ `database/seeders/ScheduleSeeder.php`
+- [ ] **Sederhanakan Migrasi Database**:
+  - Hapus atau arsipkan migrasi pembuat tabel profil (`create_pastor_profiles_table`, `create_histories_table`, `create_creeds_table`, `create_branch_churches_table`, `create_schedules_table`).
+- [ ] **Hapus Sample/Default Tests**:
+  - Hapus `tests/Feature/ExampleTest.php` dan `tests/Unit/ExampleTest.php` bawaan Laravel framework skeleton.
 
 ---
 
-### 3. Pembersihan Codebase (Opsional / Clean Up)
-- Hapus Controller/Model/Migration yang tidak lagi digunakan jika tidak ada relasi ke modul Warta/Majalah:
-  - Model & Migration: `PastorProfile`, `History`, `Creed`, `BranchChurch`, `Schedule`.
-  - Hapus file seeder terkait jika ada.
+### 3. 🏷️ Konsistensi Penamaan File & Aset (Naming Conventions)
+- [ ] **Penyelarasan Format & Penamaan Gambar di `public/images/`**:
+  - Ubah ekstensi dan nama file di `public/images/` agar konsisten menggunakan format **WebP** atau **JPG** standar:
+    - `gembala.jpg` ➔ `gembala.jpg`
+    - `tunas-akon.jpeg` ➔ `tunas-akon.jpg` / `tunas-akon.webp`
+    - `tunas-servant.jpeg` ➔ `tunas-servant.jpg` / `tunas-servant.webp`
+    - `tunas-oka.jpeg` ➔ `tunas-oka.jpg` / `tunas-oka.webp`
+- [ ] **Konsistensi Penamaan Controller & Resource**:
+  - Seluruh Controller menggunakan `PascalCase` dengan suffix `Controller` (contoh: `WartaController`, `PedangRohController`, `AboutController`).
+  - Seluruh Blade template menggunakan `kebab-case` (contoh: `branch-church-card.blade.php`, `magazine-card.blade.php`).
 
 ---
 
-## ✅ Rencana Pengujian & Verifikasi
-1. **Admin Panel**: Login ke Filament Admin (`/admin`), pastikan navigasi sidebar hanya menampilkan modul **Warta Jemaat** dan **Majalah Pedang Roh**.
-2. **Halaman Publik**:
-   - Buka Halaman Utama (`/`) dan Halaman Tentang (`/tentang`).
-   - Pastikan seluruh informasi profil (Sejarah, Visi Misi/Pengakuan Iman, Pendeta, Jadwal Ibadah, Cabang Gereja) tampil dengan lengkap, rapi, dan responsif.
-   - Pastikan tidak ada error 500 / *undefined variable* akibat query database yang dihapus.
+### 4. 📦 Audit Dependensi (Composer & NPM)
+- [ ] **Composer (Backend)**:
+  - Verifikasi bahwa `composer.json` hanya memuat package esensial: `laravel/framework`, `filament/filament`, `laravel/tinker`.
+  - Jalankan `composer clear-cache` dan `composer dump-autoload -o` untuk optimasi autoloader PHP.
+- [ ] **NPM / Node (Frontend)**:
+  - Audit package `package.json`.
+  - Evaluasi kebutuhan `@tailwindcss/postcss` vs `@tailwindcss/vite` di Tailwind CSS v4 untuk menghindari double processing stylesheet.
+  - Pastikan `npm run build` menghasilkan aset terminifikasi tanpa error.
+
+---
+
+### 5. ⚙️ Evaluasi & Optimasi Konfigurasi Environment (`.env`)
+- [ ] **Pembaruan Defaults `.env.example` & `.env`**:
+  - `APP_NAME="GBIA GRAMMATA"`
+  - `APP_TIMEZONE="Asia/Jakarta"`
+  - `APP_LOCALE="id"`
+  - `FILESYSTEM_DISK="public"`
+- [ ] **Optimasi SQLite Database**:
+  - Verifikasi konfigurasi database SQLite agar siap pakai tanpa perlu konfigurasi MySQL eksternal untuk kemudahan deployment.
+
+---
+
+## 🛠️ Rencana Eksekusi Tahapan
+1. **Tahap 1**: Menghapus Model, Seeder, dan Migrasi redundan yang sudah tidak terpakai.
+2. **Tahap 2**: Membersihkan folder storage `pastor` & `branches` serta menyelaraskan nama aset gambar.
+3. **Tahap 3**: Mengupdate `.env` & `.env.example` dengan default lokasi Indonesia & nama aplikasi yang sesuai.
+4. **Tahap 4**: Menguji ulang seluruh pengujian otomatis (`php artisan test`) untuk memastikan kestabilan aplikasi.

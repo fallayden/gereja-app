@@ -4,7 +4,7 @@
             <!-- Logo & Brand Name -->
             <div class="flex items-center space-x-3">
                 <a href="{{ route('home') }}" class="flex items-center space-x-3 group">
-                    <img src="{{ asset('images/logo.jpeg') }}" alt="Logo GBIA GRAMMATA" class="w-10 h-10 rounded-full object-cover border border-white/20 group-hover:scale-105 transition">
+                    <img src="{{ asset('images/logo.jpg') }}" alt="Logo GBIA GRAMMATA" class="w-10 h-10 rounded-full object-cover border border-white/20 group-hover:scale-105 transition">
 
                     <div>
                         <span class="font-display font-bold text-xl tracking-tight block text-white">GBIA GRAMMATA</span>

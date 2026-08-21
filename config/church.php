@@ -29,9 +29,9 @@ return [
     ],
 
     'branches' => [
-        ['name' => 'GBIA Tanjung Burung', 'pastor_name' => 'Ev. Akonius', 'photo' => 'images/tunas-akon.jpeg', 'address' => 'Tanjung Burung, Kab. Tangerang'],
-        ['name' => 'GBIA Musafir, Sepatan', 'pastor_name' => 'Ev. Servantius Lase', 'photo' => 'images/tunas-servant.jpeg', 'address' => 'Sepatan, Kab. Tangerang'],
-        ['name' => 'GBIA Citra Raya', 'pastor_name' => 'G.I. Oka Bagas', 'photo' => 'images/tunas-oka.jpeg', 'address' => 'Citra Raya, Cikupa, Tangerang'],
+        ['name' => 'GBIA Tanjung Burung', 'pastor_name' => 'Ev. Akonius', 'photo' => 'images/tunas-akon.jpg', 'address' => 'Tanjung Burung, Kab. Tangerang'],
+        ['name' => 'GBIA Musafir, Sepatan', 'pastor_name' => 'Ev. Servantius Lase', 'photo' => 'images/tunas-servant.jpg', 'address' => 'Sepatan, Kab. Tangerang'],
+        ['name' => 'GBIA Citra Raya', 'pastor_name' => 'G.I. Oka Bagas', 'photo' => 'images/tunas-oka.jpg', 'address' => 'Citra Raya, Cikupa, Tangerang'],
     ],
 
     'creeds' => [

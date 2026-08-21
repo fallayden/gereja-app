@@ -7,9 +7,6 @@
             @if(file_exists(public_path('images/foto-pedang-roh.jpg')))
                 <img src="{{ asset('images/foto-pedang-roh.jpg') }}" alt="Majalah Pedang Roh GBIA Grammata" class="w-full h-full object-cover object-center">
                 <div class="absolute inset-0" style="background-color: rgba(15, 30, 60, 0.85);"></div>
-            @elseif(file_exists(public_path('images/foto-pedang-roh.jpeg')))
-                <img src="{{ asset('images/foto-pedang-roh.jpeg') }}" alt="Majalah Pedang Roh GBIA Grammata" class="w-full h-full object-cover object-center">
-                <div class="absolute inset-0" style="background-color: rgba(15, 30, 60, 0.85);"></div>
             @else
                 <div class="w-full h-full bg-gradient-to-b from-primary to-blue-950"></div>
             @endif
