@@ -56,8 +56,7 @@
                         <div class="space-y-3">
                             @foreach($article->attachments as $attachment)
                                 <x-archive-item
-                                    :fileName="$attachment->file_name"
-                                    :date="$article->published_at->translatedFormat('d F Y')"
+                                    :fileName="$attachment->file_name ?: basename($attachment->file_path)"
                                     :downloadUrl="route('warta.download-attachment', $attachment)"
                                     :viewUrl="route('warta.view-attachment', $attachment)"
                                 />
@@ -80,8 +79,7 @@
                                 @endphp
                                 @if($attachment)
                                     <x-archive-item
-                                        :fileName="$archive->title"
-                                        :date="$archive->published_at->translatedFormat('d F Y')"
+                                        :fileName="$attachment->file_name ?: $archive->title"
                                         :downloadUrl="route('warta.download-attachment', $attachment)"
                                         :viewUrl="route('warta.view-attachment', $attachment)"
                                     />

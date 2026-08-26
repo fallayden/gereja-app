@@ -141,11 +141,16 @@ class PublicWebsiteTest extends TestCase
         $this->get('/warta-jemaat')
             ->assertOk()
             ->assertSeeText('Artikel Publik')
+            ->assertSeeText('Buletin Publik.pdf')
+            ->assertDontSeeText('Edisi:')
             ->assertSee(route('warta.download-attachment', ArticleAttachment::first()))
             ->assertDontSeeText('Artikel Draf')
             ->assertDontSeeText('Artikel Masa Depan');
 
-        $this->get('/warta-jemaat/artikel-publik')->assertOk();
+        $this->get('/warta-jemaat/artikel-publik')
+            ->assertOk()
+            ->assertSeeText('Buletin Publik.pdf')
+            ->assertDontSeeText('Edisi:');
         $this->get('/warta-jemaat/artikel-draf')->assertNotFound();
         $this->get('/warta-jemaat/artikel-masa-depan')->assertNotFound();
     }
@@ -172,7 +177,14 @@ class PublicWebsiteTest extends TestCase
 
         $response->assertOk()
             ->assertViewHas('magazines', fn ($magazines): bool => $magazines->perPage() === 8 && $magazines->total() === 10)
-            ->assertSee(route('pedang-roh.download', Magazine::firstWhere('title', 'Majalah Tahun Ini 9')));
+            ->assertSee(route('pedang-roh.download', Magazine::firstWhere('title', 'Majalah Tahun Ini 9')))
+            ->assertDontSeeText('Sebelumnya')
+            ->assertSeeText('Berikutnya');
+
+        $page2Response = $this->get('/pedang-roh?page=2');
+        $page2Response->assertOk()
+            ->assertSeeText('Sebelumnya')
+            ->assertDontSeeText('Berikutnya');
 
         $this->get('/pedang-roh?year=2025')
             ->assertOk()

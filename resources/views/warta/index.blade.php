@@ -70,8 +70,7 @@
                                 @endphp
                                 @if($attachment)
                                     <x-archive-item
-                                        :fileName="$archive->title"
-                                        :date="$archive->published_at->translatedFormat('d F Y')"
+                                        :fileName="$attachment->file_name ?: $archive->title"
                                         :downloadUrl="route('warta.download-attachment', $attachment)"
                                         :viewUrl="route('warta.view-attachment', $attachment)"
                                     />

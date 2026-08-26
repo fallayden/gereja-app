@@ -1,6 +1,6 @@
 @props([
     'fileName',
-    'date',
+    'date' => null,
     'downloadUrl',
     'viewUrl' => null,
 ])
@@ -18,9 +18,6 @@
             <h4 class="font-semibold text-sm text-primary">
                 {{ $fileName }}
             </h4>
-            <span class="text-xs text-slate-400">
-                Edisi: {{ $date }}
-            </span>
         </div>
     </div>
 
