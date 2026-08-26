@@ -45,7 +45,7 @@ class ArticleResource extends Resource
                             ->maxLength(255)
                             ->unique(Article::class, 'slug', ignoreRecord: true),
 
-                        Forms\Components\DateTimePicker::make('published_at')
+                        Forms\Components\DatePicker::make('published_at')
                             ->label('Tanggal Terbit')
                             ->default(now())
                             ->required(),
@@ -107,7 +107,7 @@ class ArticleResource extends Resource
                     ->boolean(),
                 Tables\Columns\TextColumn::make('published_at')
                     ->label('Tanggal Terbit')
-                    ->dateTime('d M Y, H:i')
+                    ->date('d M Y')
                     ->sortable(),
             ])
             ->defaultSort('published_at', 'desc')

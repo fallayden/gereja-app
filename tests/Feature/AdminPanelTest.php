@@ -83,6 +83,19 @@ class AdminPanelTest extends TestCase
         $this->actingAs($otherUser)->get('/admin')->assertForbidden();
     }
 
+    public function test_admin_can_return_to_the_public_website_and_pagination_is_translated(): void
+    {
+        $this->signInAsAdmin();
+
+        $this->get('/admin')
+            ->assertOk()
+            ->assertSee('Lihat Website')
+            ->assertSee(route('home'), escape: false);
+
+        $this->assertSame('&laquo; Sebelumnya', __('pagination.previous'));
+        $this->assertSame('Berikutnya &raquo;', __('pagination.next'));
+    }
+
     public function test_all_admin_resource_pages_render(): void
     {
         $this->signInAsAdmin();
@@ -162,7 +175,7 @@ class AdminPanelTest extends TestCase
                 'createData' => [
                     'title' => 'Artikel Admin',
                     'slug' => 'artikel-admin',
-                    'published_at' => now(),
+                    'published_at' => now()->toDateString(),
                     'is_published' => true,
                     'thumbnail' => [UploadedFile::fake()->image('artikel.jpg')],
                     'body' => '<p>Isi artikel dari admin.</p>',
@@ -190,7 +203,6 @@ class AdminPanelTest extends TestCase
                     'publish_date' => '2026-08-05',
                     'cover_image' => [UploadedFile::fake()->image('kover.jpg')],
                     'pdf_file' => [UploadedFile::fake()->create('majalah.pdf', 100, 'application/pdf')],
-                    'description' => 'Majalah hasil pengujian admin.',
                 ],
                 'updateData' => ['title' => 'Majalah Admin Diperbarui'],
                 'updatedField' => 'title',

@@ -61,11 +61,6 @@ class MagazineResource extends Resource
                             ->directory('magazines/pdfs')
                             ->required()
                             ->columnSpanFull(),
-
-                        Forms\Components\Textarea::make('description')
-                            ->label('Deskripsi / Rangkuman Singkat')
-                            ->rows(3)
-                            ->columnSpanFull(),
                     ])->columns(3),
             ]);
     }
